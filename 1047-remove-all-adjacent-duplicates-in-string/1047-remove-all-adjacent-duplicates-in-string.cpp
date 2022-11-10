@@ -1,29 +1,38 @@
-class Solution {
-public:
-    string removeDuplicates(string s) {
-        string ans = "";
-        int j = -1;
-        for(int i = 0; i<s.size();){
-            if(s[i] == s[i+1]){
-                i+=2;    
-            }
-            else{
-                if(j>=0 && s[i] == ans[j]){
-                    // ans = ans.substr(0,j);
-                    j--;
-                    i++;
+class Solution
+{
+    void solve(string &ans, stack<char> &s){
+        if(s.empty()) return;
+        char temp = s.top();
+        s.pop();
+        solve(ans, s);
+        ans += temp;
+    }
+    public:
+        string removeDuplicates(string s){
+            int n = s.size();
+            stack<char> ans;
+            for(int i = 0; i<n;){
+                if(s[i] == s[i+1]){
+                    i+=2;
                 }
                 else{
-                    if(ans.size() == j+1){
-                        ans += s[i++];
+                    if(ans.empty()){
+                        ans.push(s[i]);
                     }
                     else{
-                        ans[j+1] = s[i++];
+                        char temp = ans.top();
+                        if(temp == s[i]){
+                            ans.pop();
+                        }
+                        else{
+                            ans.push(s[i]);
+                        }
                     }
-                    j++;
+                    i++;
                 }
             }
+            string s2 = "";
+            solve(s2, ans);
+            return s2;
         }
-        return ans.substr(0,j+1);
-    }
 };
