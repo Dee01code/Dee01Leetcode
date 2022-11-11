@@ -11,11 +11,7 @@ class Solution
             {
                 nums[cnt] = nums[i];
                 j = i + 1;
-                while (j<nums.size() && nums[i] == nums[j])
-                {
-                    i++;
-                    j++;
-                }
+                while (j<nums.size() && nums[i] == nums[j]) j++;
                 i = j;
                 cnt++;
             }
