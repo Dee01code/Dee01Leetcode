@@ -10,25 +10,27 @@ using namespace std;
 
 class Solution{
   public:
-  int smallestSumSubarray(vector<int>& a){
+  
+  int kadane(vector<int> a){
       
-      int sum = INT_MAX;
-      int ans = INT_MAX;
-      
+      int sum = 0;
+      int ans = INT_MIN;
       for(auto i : a){
-          
-          if(sum > 0){
-              sum = i;
+          sum += i;
+          ans = max(ans,sum);
+          if(sum < 0){
+              sum = 0;
           }
-          else{
-              sum += i;
-          }
-          
-          ans = min(sum,ans);
-          
       }
       return ans;
       
+  }
+  int smallestSumSubarray(vector<int>& a){
+      
+    for(int i = 0; i<a.size(); i++){
+        a[i] = -a[i];
+    }
+      return -kadane(a);
   }
 };
 
