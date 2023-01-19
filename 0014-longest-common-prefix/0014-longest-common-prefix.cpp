@@ -19,6 +19,7 @@ public:
     Trie(){ 
         root = new TrieNode('\0');
     }
+    
     /*------------------------------------------------------------*/
 
     void  insertInner(TrieNode* root, string word){
@@ -40,31 +41,10 @@ public:
         insertInner(child,word.substr(1));
     }
 
-    void insert(string word){
-        insertInner(root,word);
-        return;
-    }
-
     /*------------------------------------------------------------*/
 
-    bool  search(TrieNode* root, string word){
-        if(word.size() == 0){
-            return root -> terminal;
-        }
-
-        TrieNode* child;
-        int index = word[0]-'a';
-
-        if(root->kids[index] != NULL){
-            child = root->kids[index];
-        }
-        else{
-            return false;
-        }
-        return search(child,word.substr(1));
-    }
+    /*------------------------------------------------------------*/
     
-    /*------------------------------------------------------------*/
     int branchNumber(TrieNode* root){
         int ans = 0;
         for(int i = 0; i<26; i++){
@@ -90,11 +70,7 @@ public:
         }
         
         lcp(child,ans);
-    }
-    
-    
-    
-    
+    }  
 };
 
     
@@ -106,7 +82,7 @@ public:
         Trie *t = new Trie();
         for(auto i : strs){
             if(i.size()==0) return ans;
-            t->insert(i);
+            t->insertInner(t->root,i);
         }
 
         t->lcp(t->root,ans);
