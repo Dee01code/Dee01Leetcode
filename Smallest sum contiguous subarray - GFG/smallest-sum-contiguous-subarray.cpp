@@ -11,26 +11,37 @@ using namespace std;
 class Solution{
   public:
   
-  int kadane(vector<int> a){
+//   int kadane(vector<int> a){
       
-      int sum = 0;
-      int ans = INT_MIN;
-      for(auto i : a){
-          sum += i;
-          ans = max(ans,sum);
-          if(sum < 0){
-              sum = 0;
-          }
-      }
-      return ans;
+//       int sum = 0;
+//       int ans = INT_MIN;
+//       for(auto i : a){
+//           sum += i;
+//           ans = max(ans,sum);
+//           if(sum < 0){
+//               sum = 0;
+//           }
+//       }
+//       return ans;
       
-  }
+//   }
   int smallestSumSubarray(vector<int>& a){
       
-    for(int i = 0; i<a.size(); i++){
-        a[i] = -a[i];
+    // for(int i = 0; i<a.size(); i++){
+    //     a[i] = -a[i];
+    // }
+    //   return -kadane(a);
+    
+    int sum = 0;
+    int res = INT_MAX;
+    for(auto i : a){
+        sum += i;
+        res = min(res,sum);
+        if(sum > 0){
+            sum = 0;
+        }
     }
-      return -kadane(a);
+    return res;
   }
 };
 
