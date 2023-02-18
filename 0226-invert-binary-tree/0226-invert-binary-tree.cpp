@@ -16,10 +16,10 @@ public:
         if(!root) return;
         
         if(root->left != NULL && root->right != NULL){
-            // swap(root->left,root->right);
-            TreeNode* temp = root->left;
-            root->left = root->right;
-            root->right = temp;
+            swap(root->left,root->right);
+            // TreeNode* temp = root->left;
+            // root->left = root->right;
+            // root->right = temp;
             solve(root->left);
             solve(root->right);
         }
