@@ -24,6 +24,7 @@ public:
             solve(root->right);
         }
         
+        
         else if(root->right ){
             root -> left = root->right;
             root->right = NULL;
@@ -35,12 +36,31 @@ public:
             root->left = NULL;
             solve(root->right);
         }
-        
     }
     
     TreeNode* invertTree(TreeNode* root) {
         
-        solve(root);
+        if(!root) return NULL;
+        
+        if(root->left != NULL && root->right != NULL){
+            swap(root->left,root->right);
+            
+            invertTree(root->left);
+            invertTree(root->right);
+        }
+        
+        else if(root->right ){
+            root -> left = root->right;
+            root->right = NULL;
+            invertTree(root->left);
+        }
+        
+        else if(root->left){
+            root -> right = root->left;
+            root->left = NULL;
+            invertTree(root->right);
+        }
+        
         return root;
         
     }
