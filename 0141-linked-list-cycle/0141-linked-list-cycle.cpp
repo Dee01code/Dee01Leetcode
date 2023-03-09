@@ -14,14 +14,10 @@ public:
         
         unordered_map<ListNode*, ListNode*> m;
         
-        ListNode* cur = head->next;
-        ListNode* prev = head;
-        
-        while(cur != NULL){
-            if(m.count(cur)) return 1;
-            m[cur] = prev;
-            prev = cur;
-            cur = cur->next;
+        while(head->next != NULL){
+            if(m.count(head->next)) return 1;
+            m[head->next] = head;
+            head = head->next;
         }
         return 0;
     }
