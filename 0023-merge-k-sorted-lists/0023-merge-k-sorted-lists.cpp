@@ -18,8 +18,6 @@ class Solution {
  
 public:
     
-    
-    
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         
         priority_queue<ListNode*, vector<ListNode*>, compare> pq;
