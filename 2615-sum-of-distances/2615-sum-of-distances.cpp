@@ -11,8 +11,6 @@ public:
         
         vector<long long> arr(n,0);
         
-        
-        
         for(auto ind : m){
             vector<int> temp = ind.second;
             int len = temp.size();
@@ -25,6 +23,7 @@ public:
                 for(int i = 1; i<len; i++){
                     prefix[i] = prefix[i-1] + temp[i];
                 }
+                
                 long long int sum1 = 0;
                 long long int sum2 = 0;
                 for(int i = 0; i<len; i++){
@@ -42,9 +41,7 @@ public:
                     post2 *= postLen;
                         
                     if(preLen > 0) sum1 += pre1-presum; 
-                    cout << " Before post " ;
                     if(postLen > 0) sum2 += postsum - post2; 
-                    cout << " After prepost ";
                     
                     arr[index] += sum1; 
                     arr[index] += sum2;
@@ -53,18 +50,6 @@ public:
             else arr[temp[0]] = 0;
             
         }
-        
-        // for(int i = 0; i<n; i++){
-        //     int num = nums[i];
-        //     vector<int> temp = m[num];
-        //     long long sum = 0;
-        //     if(temp.size() > 0){
-        //         for(auto ind : temp){
-        //             if( i != ind) sum += abs(i-ind);
-        //         }
-        //     }
-        //     arr[i] = sum;
-        // }
         return arr;
     }
 };
