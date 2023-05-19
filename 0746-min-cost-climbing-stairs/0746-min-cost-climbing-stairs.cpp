@@ -20,7 +20,16 @@ public:
     int minCostClimbingStairs(vector<int>& cost) {
         int n = cost.size();
         vector<int> dp(n+1,-1);
+        
+        vector<int> table(n);
+        table[0] = cost[0];
+        table[1] = cost[1];
+        
+        for(int i = 2; i<n; i++){
+            table[i] = min(table[i-1],table[i-2])+cost[i];
+        }
+        return min(table[n-1],table[n-2]);
         // return min(side0(cost,0,n,dp),side0(cost,1,n,dp));
-        return solve(cost,n,dp);
+        // return solve(cost,n,dp);
     }
 };
