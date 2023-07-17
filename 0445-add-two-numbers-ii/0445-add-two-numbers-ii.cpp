@@ -25,66 +25,78 @@ public:
     
     
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* rv1 = NULL;
-        ListNode* temp1 = reverse(l1,rv1);
-        temp1 -> next = NULL;
         
-        ListNode* rv2 = NULL;
-        ListNode* temp2 = reverse(l2,rv2);
-        temp2 -> next = NULL;
+        stack<int> s1,s2;
         
-        int cry = 0;
+        while(l1){
+            s1.push(l1->val);
+            l1 = l1->next;
+        }
+        
+        while(l2){
+            s2.push(l2->val);
+            l2 = l2->next;
+        }
+        
         ListNode* ans = NULL;
-        while(rv1 && rv2){
-            cout << "Hi" << endl;
-            int sum = rv1->val + rv2->val + cry;
+        int cry = 0;
+        
+        while(!s1.empty() && !s2.empty()){
+            int a = s1.top();
+            int b = s2.top();
+            s1.pop(); s2.pop();
+            
+            int sum = a+b+cry;
             if(sum > 9){
-                sum = sum % 10;
+                sum = sum%10;
                 cry = 1;
             }
             else cry = 0;
+            
             ListNode* temp = new ListNode(sum);
             temp -> next = ans;
             ans = temp;
-            rv1 = rv1->next;
-            rv2 = rv2->next;
+            
         }
-        cout << "Hi" << endl;
-        while(rv1){
-            cout << "Hi" << endl;
-            int sum = rv1->val+cry;
+        while(!s1.empty()){
+            int a = s1.top();
+            s1.pop();
+            
+            int sum = a+cry;
             if(sum > 9){
-                sum = sum % 10;
+                sum = sum%10;
                 cry = 1;
             }
             else cry = 0;
-            cout << sum << " ";
+            
             ListNode* temp = new ListNode(sum);
             temp -> next = ans;
             ans = temp;
-            rv1 = rv1->next;
+            
         }
-        cout << "Hi" << endl;
-        while(rv2){
-            cout << "Hi" << endl;
-            int sum = rv2->val+cry;
+        while(!s2.empty()){
+    
+            int b = s2.top();
+            s2.pop();
+            
+            int sum = b+cry;
             if(sum > 9){
-                sum = sum % 10;
+                sum = sum%10;
                 cry = 1;
             }
             else cry = 0;
+            
             ListNode* temp = new ListNode(sum);
             temp -> next = ans;
             ans = temp;
-            rv2 = rv2->next;
+            
         }
+        
         if(cry){
             ListNode* temp = new ListNode(cry);
             temp -> next = ans;
             ans = temp;
         }
-        cout << "Hi" << endl;
         return ans;
-        
     }
 };
