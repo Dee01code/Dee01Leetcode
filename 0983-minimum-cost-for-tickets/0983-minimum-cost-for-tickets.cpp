@@ -1,26 +1,51 @@
 class Solution {
 public:
-    int max_day, cost[5], dys[500], dp[500];
+    
+//     int solve(int ind, vector<int>& days, int validity , vector<int>& costs, ){
+        
+//         if(ind >= days.size()) return 0;
+        
+        
+//         int ans = INT_MAX;
+//         if(days[ind] <= validity)
+//             ans = min(ans, solve(ind+1, days, validity, costs));
 
-    int solve(int id) {
-        if(id > 365) return 0;
-        if(dp[id] != -1) return dp[id];
+//         else{
+//             for(int i = 0; i<3; i++){
+//                 validity = (i == 0) ? days[ind] : ((i == 1) ? days[ind]+6 : days[ind]+29);
+//                 ans = min(ans, costs[i] + solve(ind+1,days,validity,costs));
+//             }
+//         }
+        
+//         return ans; 
+//     }
+    
+    int solve(int ind, vector<int>& days, int validity , vector<int>& costs, vector<vector<int>> &dp){
+        
+        if(ind >= days.size()) return 0;
+        
+        if(dp[ind][validity] != -1) return dp[ind][validity];
+        
+        int ans = INT_MAX;
+        // cout <<"At ind = " << ind << endl;
+        
+        if(days[ind] <= validity)
+            ans = min(ans, solve(ind+1, days, validity, costs, dp));
 
-        int ans;
-        if(dys[id]) {
-            ans = min({cost[0] + solve(id+1), cost[1] + solve(id+7), cost[2] + solve(id+30)});
+        else{
+            for(int i = 0; i<3; i++){
+                validity = (i == 0) ? days[ind] : ((i == 1) ? days[ind]+6 : days[ind]+29);
+                ans = min(ans, costs[i] + solve(ind+1,days,validity,costs, dp));
+            }
         }
-        else {
-            ans = solve(id+1);
-        }
-        return dp[id] = ans;
+        
+        return dp[ind][validity] = ans; 
     }
-
+    
     int mincostTickets(vector<int>& days, vector<int>& costs) {
-        for(int i=0; i<3; i++) cost[i] = costs[i];
-        for(int i=0; i<500; i++) dp[i] = -1;
-        for(int i=0; i<days.size(); i++) dys[days[i]] = 1;
-        int ans = solve(0);
-        return ans;
+        
+        vector<vector<int>> dp(366,vector<int>(400,-1));
+        
+        return solve(0,days,0,costs,dp);
     }
 };
