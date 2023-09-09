@@ -19,7 +19,7 @@ public:
      
         for(int i = 1; i<=t; i++){
             for(int j = 0; j<nums.size(); j++){
-                if(t-nums[j] >= 0)
+                if(i-nums[j] >= 0)
                     dp[i] += dp[i-nums[j]];
             }
         }
