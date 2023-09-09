@@ -14,9 +14,9 @@ public:
     }
     
     int solveTab(vector<int>& nums, int t){
-        int dp[t+1];
+        unsigned int dp[t+1];
         memset(dp , 0, sizeof(dp));
-     
+        dp[0] = 1;
         for(int i = 1; i<=t; i++){
             for(int j = 0; j<nums.size(); j++){
                 if(i-nums[j] >= 0)
@@ -29,7 +29,7 @@ public:
     
     int combinationSum4(vector<int>& nums, int target) {
         memset(dp,-1,sizeof(dp));
-        return solve(nums, target);
+        // return solve(nums, target);
         return solveTab(nums, target);
     }
 };
