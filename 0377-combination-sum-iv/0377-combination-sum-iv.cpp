@@ -20,7 +20,7 @@ public:
         for(int i = 1; i<=t; i++){
             for(int j = 0; j<nums.size(); j++){
                 if(t-nums[j] >= 0)
-                    dp[i] += dp[t-nums[j]];
+                    dp[i] += dp[i-nums[j]];
             }
         }
         return dp[t];
