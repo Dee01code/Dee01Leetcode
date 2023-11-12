@@ -3,11 +3,11 @@ class Solution:
         if src == tar:
             return 0 
         
-        mp = dict()
+        mp = defaultdict(list)
         
         for bus in range(len(routes)):
             for stop in routes[bus]:
-                mp.setdefault(stop,[]).append(bus)
+                mp[stop].append(bus)
         
         queue = []
         visit = [0 for i in range(501)]
